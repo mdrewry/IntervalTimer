@@ -3,6 +3,7 @@ package com.markdrewry.intervaltimer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -12,7 +13,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class addTimer extends AppCompatActivity {
     private ImageButton saveTimer;
@@ -21,6 +27,7 @@ public class addTimer extends AppCompatActivity {
     private EditText lenInt;
     private EditText lenBreak;
     private TimerObj newT;
+    private ArrayList<TimerObj> timers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +38,15 @@ public class addTimer extends AppCompatActivity {
         lenBreak = findViewById(R.id.editTimeOfBreak);
         saveTimer = findViewById(R.id.saveTimerButton);
         newT = new TimerObj();
+        getList();
         saveTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!nameText.getText().toString().equals("") && !numIntText.getText().toString().equals("") && !lenInt.getText().toString().equals("") && !lenBreak.getText().toString().equals("")){
                     createTimer();
+                    storeList();
                     Intent exit = new Intent(addTimer.this,MainActivity.class);
-                    exit.putExtra("timer",newT);
+                    finish();
                     startActivity(exit);
                 }
                 else{
@@ -51,6 +60,25 @@ public class addTimer extends AppCompatActivity {
         newT.setIntervalLength(Integer.parseInt(lenInt.getText().toString()));
         newT.setNumIntervals(Integer.parseInt(numIntText.getText().toString()));
         newT.setName(nameText.getText().toString());
+        timers.add(newT);
+    }
+    private void getList(){
+        SharedPreferences sharedPrefs = getSharedPreferences("sharedPrefs",MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPrefs.getString("timers",null);
+        Type type = new TypeToken<ArrayList<TimerObj>>() {}.getType();
+        timers = gson.fromJson(json,type);
+        if(timers == null){
+            timers = new ArrayList<TimerObj>();
+        }
+    }
+    private void storeList(){
+        SharedPreferences sharedPrefs = getSharedPreferences("sharedPrefs",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(timers);
+        editor.putString("timers",json);
+        editor.apply();
     }
 
 }

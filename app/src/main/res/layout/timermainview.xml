@@ -6,6 +6,7 @@
         android:id="@+id/nameOfTimerInList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"/>
+        android:textAlignment="center"
+        android:textSize="32dp"/>
 
 </LinearLayout>

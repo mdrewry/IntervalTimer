@@ -3,18 +3,17 @@ package com.markdrewry.intervaltimer;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Timer;
 
 public class TimerObj implements Parcelable {
     private String name;
     private int numIntervals,intervalLength,breakLength;
     public TimerObj(){
     }
-    public TimerObj(Parcel in){
+    protected TimerObj(Parcel in){
         this.name = in.readString();
         this.numIntervals = in.readInt();
-        this.breakLength = in.readInt();
         this.intervalLength = in.readInt();
+        this.breakLength = in.readInt();
     }
     public TimerObj(String n, int ni, int il, int bl){
         this.name = n;
@@ -42,8 +41,9 @@ public class TimerObj implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeInt(numIntervals);
-        dest.writeInt(breakLength);
         dest.writeInt(intervalLength);
+        dest.writeInt(breakLength);
+
     }
 
     public String getName() {

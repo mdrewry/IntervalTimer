@@ -6,7 +6,40 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context=".timer">
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:progressBarStyleHorizontal"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toBottomOf="@id/timerNameText"
+        android:progress="100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/progressBarBreak"
+        android:progressDrawable="@drawable/progressb" />
+    <ProgressBar
+        android:id="@+id/progressBarBreak"
+        style="?android:progressBarStyleHorizontal"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:progress="100"
+        app:layout_constraintTop_toBottomOf="@id/progressBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/progressBarTotal"
+        android:progressDrawable="@drawable/progressb" />
+    <ProgressBar
+        android:id="@+id/progressBarTotal"
+        style="?android:progressBarStyleHorizontal"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:progress="100"
+        app:layout_constraintTop_toBottomOf="@id/progressBarBreak"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/playButton"
+        android:progressDrawable="@drawable/progressb">
+    </ProgressBar>
     <TextView
         android:id="@+id/timerNameText"
         android:layout_width="wrap_content"
@@ -39,10 +72,10 @@
         android:textColor="@color/colorPrimaryDark"
         android:text="3"
         android:textSize="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="32dp"/>
+        app:layout_constraintStart_toStartOf="@id/playButton"
+        app:layout_constraintEnd_toEndOf="@id/playButton"
+        app:layout_constraintTop_toTopOf="@id/playButton"
+        app:layout_constraintBottom_toBottomOf="@id/playButton" />
 
     <TextView
         android:id="@+id/progressLeftText"
@@ -52,21 +85,12 @@
         android:textColor="@color/colorPrimaryDark"
         android:text="30"
         android:textSize="45dp"
-        app:layout_constraintTop_toBottomOf="@id/timerNameText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/breakText"/>
+        app:layout_constraintStart_toStartOf="@id/progressBar"
+        app:layout_constraintEnd_toEndOf="@id/progressBar"
+        app:layout_constraintTop_toTopOf="@id/progressBar"
+        app:layout_constraintBottom_toBottomOf="@id/progressBar"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:indeterminateDrawable="@drawable/progressb"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:layout_constraintTop_toBottomOf="@id/timerNameText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/breakText" />
+
     <TextView
         android:id="@+id/breakText"
         android:layout_width="wrap_content"
@@ -75,19 +99,22 @@
         android:textColor="@color/colorPrimaryDark"
         android:text="Rest"
         android:textSize="25dp"
-        app:layout_constraintTop_toBottomOf="@id/progressLeftText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/playButton"/>
+        app:layout_constraintStart_toStartOf="@id/progressBarBreak"
+        app:layout_constraintEnd_toEndOf="@id/progressBarBreak"
+        app:layout_constraintTop_toTopOf="@id/progressBarBreak"
+        app:layout_constraintBottom_toBottomOf="@id/progressBarBreak"/>
 
-    <ProgressBar
-        android:id="@+id/progressBarBreak"
-        style="?android:attr/progressBarStyle"
-        android:indeterminateDrawable="@drawable/progressb"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:layout_constraintTop_toBottomOf="@id/progressLeftText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/playButton" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalLeftText"
+        android:text="1/?"
+        android:textSize="25dp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@id/progressBarTotal"
+        app:layout_constraintEnd_toEndOf="@id/progressBarTotal"
+        app:layout_constraintTop_toTopOf="@id/progressBarTotal"
+        app:layout_constraintBottom_toBottomOf="@id/progressBarTotal"
+        ></TextView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
