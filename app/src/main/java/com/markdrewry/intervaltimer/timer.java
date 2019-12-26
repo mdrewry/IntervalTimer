@@ -96,18 +96,16 @@ public class timer extends AppCompatActivity {
         mCountDownTimer = new CountDownTimer((intervalLength+breakLength)*1000*numIntervals,(intervalLength+breakLength)*1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if(counter>0) {
-                    if(totalBar.getProgress()+incrementTotalProgress>totalBar.getMax()-incrementTotalProgress)
-                        totalBar.setProgress(totalBar.getMax());
-                    else
-                        totalBar.incrementProgressBy(incrementTotalProgress);
-                }
-                totalLeftText.setText(counter+"/"+numIntervals);
+                if(totalBar.getProgress()+incrementTotalProgress>totalBar.getMax()-incrementTotalProgress)
+                    totalBar.setProgress(totalBar.getMax());
+                else
+                    totalBar.incrementProgressBy(incrementTotalProgress);
+                totalLeftText.setText(counter+1+"/"+numIntervals);
                 intervalTimer();
             }
             @Override
             public void onFinish() {
-                CountDownTimer delay = new CountDownTimer(150,150) {
+                new CountDownTimer(150,150) {
                     @Override
                     public void onTick(long millisUntilFinished) {
 
@@ -135,12 +133,12 @@ public class timer extends AppCompatActivity {
             @Override
             public void onFinish() {
                 counter++;
-                if(counter==numIntervals){
-                    intervalLeft.setText(null);
-                }
-                else
-                    intervalLeft.setText(""+0);
                 intervalBar.setProgress(0);
+                if(counter>=numIntervals){
+                    timerName.setText("Rest");
+                    restLeft.setText("");
+                    restBar.setProgress(0);
+                }
                 breakTimer();
             }
         }.start();
@@ -149,7 +147,7 @@ public class timer extends AppCompatActivity {
         mCountDownTimer = new CountDownTimer(breakLength * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if(counter != numIntervals) {
+                if(counter<numIntervals) {
                     restLeft.setText("" + (Math.round((double) millisUntilFinished / 1000.0)));
                     if (restBar.getProgress() + incrementBreakProgress > restBar.getMax() - incrementBreakProgress)
                         restBar.setProgress(restBar.getMax());
@@ -157,8 +155,11 @@ public class timer extends AppCompatActivity {
                         restBar.incrementProgressBy(incrementBreakProgress);
                 }
                 else{
-                    restBar.setProgress(0);
-                    restLeft.setText("Rest");
+                    intervalLeft.setText("" + (Math.round((double) millisUntilFinished / 1000.0)));
+                    if (intervalBar.getProgress() + incrementBreakProgress > intervalBar.getMax() - incrementBreakProgress)
+                        intervalBar.setProgress(intervalBar.getMax());
+                    else
+                        intervalBar.incrementProgressBy(incrementBreakProgress);
                 }
             }
             @Override
@@ -170,6 +171,7 @@ public class timer extends AppCompatActivity {
     }
     private void resetTimer(){
         counter = 0;
+        timerName.setText(t.getName());
         totalBar.setProgress(totalBar.getMax());
         restBar.setProgress(restBar.getMax());
         intervalBar.setProgress(intervalBar.getMax());

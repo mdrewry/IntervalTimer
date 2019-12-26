@@ -6,115 +6,162 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context=".addTimer">
-
-    <TextView
-        android:id="@+id/createTimerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="Create Timer"
-        android:textSize="45dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/nameOfTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-
-        android:text="Name of Timer:"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@id/numOfIntervals"
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/mainRectangle"
+        android:background="@drawable/rectangle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/createTimerText" />
-
-    <TextView
-        android:id="@+id/numOfIntervals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:text="Number of Intervals"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@id/timeOfIntervals"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameOfTimer" />
-
-    <TextView
-        android:id="@+id/timeOfIntervals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:text="Length of Intervals(Seconds)"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="@id/timeOfBreak"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/numOfIntervals" />
-
-    <TextView
-        android:id="@+id/timeOfBreak"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:text="Length of Break(Seconds)"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@id/guidelineBottom"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timeOfIntervals" />
-
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineUpper"
+        app:layout_constraintBottom_toTopOf="@id/guidelineBottom"></ImageView>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/circle"
+        android:scaleX="1.05"
+        android:scaleY="1.05"
+        app:layout_constraintStart_toStartOf="@id/saveTimerButton"
+        app:layout_constraintEnd_toEndOf="@id/saveTimerButton"
+        app:layout_constraintTop_toTopOf="@id/saveTimerButton"
+        app:layout_constraintBottom_toBottomOf="@id/saveTimerButton"/>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@drawable/rectangle2"
+        app:layout_constraintStart_toStartOf="@id/editNameOfTimer"
+        app:layout_constraintEnd_toEndOf="@id/editNameOfTimer"
+        app:layout_constraintTop_toBottomOf="@id/editNameOfTimer" />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@drawable/rectangle2"
+        app:layout_constraintStart_toStartOf="@id/editTimeOfBreak"
+        app:layout_constraintEnd_toEndOf="@id/editTimeOfBreak"
+        app:layout_constraintTop_toBottomOf="@id/editTimeOfBreak" />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@drawable/rectangle2"
+        app:layout_constraintStart_toStartOf="@id/editTimeOfIntervals"
+        app:layout_constraintEnd_toEndOf="@id/editTimeOfIntervals"
+        app:layout_constraintTop_toBottomOf="@id/editTimeOfIntervals" />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@drawable/rectangle2"
+        app:layout_constraintStart_toStartOf="@id/editNumOfIntervals"
+        app:layout_constraintEnd_toEndOf="@id/editNumOfIntervals"
+        app:layout_constraintTop_toBottomOf="@id/editNumOfIntervals" />
+    //all editTexts
     <EditText
         android:id="@+id/editNameOfTimer"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:ems="5"
+        android:background="@null"
         android:inputType="textPersonName"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/numOfIntervals"
+        android:textSize="20dp"
+        android:ems="8"
+        app:layout_constraintTop_toTopOf="@id/mainRectangle"
         app:layout_constraintStart_toEndOf="@id/nameOfTimer"
-        app:layout_constraintTop_toBottomOf="@id/createTimerText" />
-
+        app:layout_constraintBottom_toTopOf="@id/editNumOfIntervals"/>
     <EditText
         android:id="@+id/editNumOfIntervals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@null"
         android:ems="2"
         android:inputType="number"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@id/timeOfIntervals"
-        app:layout_constraintStart_toEndOf="@+id/numOfIntervals"
-        app:layout_constraintTop_toBottomOf="@id/nameOfTimer" />
-
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/editNameOfTimer"
+        app:layout_constraintStart_toEndOf="@id/numOfIntervals"
+        app:layout_constraintBottom_toTopOf="@id/editTimeOfIntervals" />
     <EditText
         android:id="@+id/editTimeOfIntervals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@null"
         android:ems="2"
         android:inputType="number"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@id/timeOfBreak"
-        app:layout_constraintStart_toEndOf="@+id/timeOfIntervals"
-        app:layout_constraintTop_toBottomOf="@id/editNumOfIntervals" />
-
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/editNumOfIntervals"
+        app:layout_constraintStart_toEndOf="@id/timeOfIntervals"
+        app:layout_constraintBottom_toTopOf="@id/editTimeOfBreak" />
     <EditText
         android:id="@+id/editTimeOfBreak"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@null"
         android:ems="2"
         android:inputType="number"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
-        app:layout_constraintStart_toEndOf="@+id/timeOfBreak"
-        app:layout_constraintTop_toBottomOf="@id/timeOfIntervals" />
-
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/editTimeOfIntervals"
+        app:layout_constraintStart_toEndOf="@id/timeOfBreak"
+        app:layout_constraintBottom_toBottomOf="@id/mainRectangle" />
+    //all supporting textViews
+    <TextView
+        android:id="@+id/createTimerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="Create Timer"
+        android:textSize="32dp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mainRectangle" />
+    <TextView
+        android:id="@+id/nameOfTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="Name of Timer:"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@id/mainRectangle"
+        app:layout_constraintStart_toStartOf="@id/mainRectangle"
+        app:layout_constraintBottom_toTopOf="@id/numOfIntervals"/>
+    <TextView
+        android:id="@+id/numOfIntervals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="Number of Intervals"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toBottomOf="@id/nameOfTimer"
+        app:layout_constraintStart_toStartOf="@id/mainRectangle"
+        app:layout_constraintBottom_toTopOf="@id/timeOfIntervals"/>
+    <TextView
+        android:id="@+id/timeOfIntervals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="Length of Intervals(Seconds)"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toBottomOf="@id/numOfIntervals"
+        app:layout_constraintStart_toStartOf="@id/mainRectangle"
+        app:layout_constraintBottom_toTopOf="@id/timeOfBreak"/>
+    <TextView
+        android:id="@+id/timeOfBreak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="Length of Break(Seconds)"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toBottomOf="@id/timeOfIntervals"
+        app:layout_constraintStart_toStartOf="@id/mainRectangle"
+        app:layout_constraintBottom_toBottomOf="@id/mainRectangle"/>
+    //saveButton
     <ImageButton
         android:id="@+id/saveTimerButton"
         android:layout_width="wrap_content"
@@ -132,5 +179,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".8" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineUpper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
