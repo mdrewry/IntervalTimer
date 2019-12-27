@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -27,6 +30,8 @@ public class timer extends AppCompatActivity {
     private int numIntervals,intervalLength,breakLength;
     private int incrementIntervalProgress, incrementTotalProgress, incrementBreakProgress;
     private int counter=0;
+    private SoundPool sounds;
+    private int soundID1,soundID2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +49,22 @@ public class timer extends AppCompatActivity {
         numIntervals = t.getNumIntervals();
         intervalLength = t.getIntervalLength();
         breakLength = t.getBreakLength();
-        incrementBreakProgress = 100/(breakLength);
-        incrementIntervalProgress = 100/(intervalLength);
-        incrementTotalProgress = 100/(numIntervals);
+        intervalBar.setMax(intervalLength);
+        incrementIntervalProgress = 1;
+        restBar.setMax(breakLength);
+        incrementBreakProgress = 1;
+        totalBar.setMax(numIntervals);
+        incrementTotalProgress = 1;
+        incrementIntervalProgress = 1;
         Drawable draw= getDrawable(R.drawable.progressb);
         Drawable draw2 = getDrawable(R.drawable.progressb);
         Drawable draw3 = getDrawable(R.drawable.progressb);
         intervalBar.setProgressDrawable(draw);
         restBar.setProgressDrawable(draw2);
         totalBar.setProgressDrawable(draw3);
+        sounds = new SoundPool(5,AudioManager.STREAM_MUSIC,0);
+        soundID1 = sounds.load(getApplicationContext(),R.raw.beepmain,1);
+        soundID2 = sounds.load(getApplicationContext(),R.raw.beepsecondary,2);
         updateUI();
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +95,10 @@ public class timer extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 countdownText.setText(""+(1+(millisUntilFinished/1000)));
+                if(millisUntilFinished<=1000)
+                    playSound(false);
+                else
+                    playSound(true);
             }
 
             @Override
@@ -110,7 +126,6 @@ public class timer extends AppCompatActivity {
                     public void onTick(long millisUntilFinished) {
 
                     }
-
                     @Override
                     public void onFinish() {
                         resetTimer();
@@ -124,16 +139,20 @@ public class timer extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 intervalLeft.setText(""+(Math.round((double)millisUntilFinished / 1000.0)));
-                if(intervalBar.getProgress()+incrementIntervalProgress>intervalBar.getMax()-incrementIntervalProgress)
-                    intervalBar.setProgress(intervalBar.getMax());
-                else
-                    intervalBar.incrementProgressBy(incrementIntervalProgress);
+                intervalBar.incrementProgressBy(incrementIntervalProgress);
+                if(millisUntilFinished<=3000){
+                    if(millisUntilFinished<=1000)
+                        playSound(false);
+                    else
+                        playSound(true);
+                }
             }
 
             @Override
             public void onFinish() {
                 counter++;
                 intervalBar.setProgress(0);
+                intervalLeft.setText(""+0);
                 if(counter>=numIntervals){
                     timerName.setText("Rest");
                     restLeft.setText("");
@@ -147,19 +166,13 @@ public class timer extends AppCompatActivity {
         mCountDownTimer = new CountDownTimer(breakLength * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if(counter<numIntervals) {
-                    restLeft.setText("" + (Math.round((double) millisUntilFinished / 1000.0)));
-                    if (restBar.getProgress() + incrementBreakProgress > restBar.getMax() - incrementBreakProgress)
-                        restBar.setProgress(restBar.getMax());
+                restLeft.setText("" + (Math.round((double) millisUntilFinished / 1000.0)));
+                restBar.incrementProgressBy(incrementBreakProgress);
+                if(millisUntilFinished<=3000){
+                    if(millisUntilFinished<=1000)
+                        playSound(false);
                     else
-                        restBar.incrementProgressBy(incrementBreakProgress);
-                }
-                else{
-                    intervalLeft.setText("" + (Math.round((double) millisUntilFinished / 1000.0)));
-                    if (intervalBar.getProgress() + incrementBreakProgress > intervalBar.getMax() - incrementBreakProgress)
-                        intervalBar.setProgress(intervalBar.getMax());
-                    else
-                        intervalBar.incrementProgressBy(incrementBreakProgress);
+                        playSound(true);
                 }
             }
             @Override
@@ -180,5 +193,11 @@ public class timer extends AppCompatActivity {
         totalLeftText.setText(numIntervals+"/"+numIntervals);
         timeRunning = false;
         playButton.setVisibility(View.VISIBLE);
+    }
+    private void playSound(boolean main){
+        if(main)
+            sounds.play(soundID1,1,1,1,0,1);
+        else
+            sounds.play(soundID2,1,1,1,0,1);
     }
 }
