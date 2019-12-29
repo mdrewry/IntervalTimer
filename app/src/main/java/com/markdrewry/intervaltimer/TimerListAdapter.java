@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,6 +45,8 @@ public class TimerListAdapter extends BaseAdapter {
         itemView = (itemView == null) ? inflater.inflate(R.layout.timermainview,null): itemView;
         TextView timerName = itemView.findViewById(R.id.nameOfTimerInList);
         timerName.setText(timers.get(position).getName());
+        ImageButton deleteB = itemView.findViewById(R.id.deleteTimerButton);
+        deleteB.setVisibility(View.INVISIBLE);
         return itemView;
     }
 }
