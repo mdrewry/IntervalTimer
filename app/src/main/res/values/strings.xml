@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IntervalTimer</string>
+    <string name="app_name">Interval</string>
     <string name="selectTimerText">Select Timer</string>
 
 </resources>

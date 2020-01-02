@@ -20,57 +20,45 @@ import android.widget.Toast;
 import javax.xml.datatype.Duration;
 
 public class timer extends AppCompatActivity {
-
-    private ImageButton playButton;
+    private Drawable muteTexture,unmuteTexture;
+    private ImageButton playButton, cancelButton, muteButton;
     private ProgressBar intervalBar, restBar, totalBar;
     private TextView timerName, intervalLeft, restLeft, countdownText, totalLeftText;
     private TimerObj t;
-    private CountDownTimer mCountDownTimer;
-    private boolean timeRunning;
-    private int numIntervals,intervalLength,breakLength;
-    private int incrementIntervalProgress, incrementTotalProgress, incrementBreakProgress;
-    private int counter=0;
+    private CountDownTimer startTimer,totalTimer,intTimer,breakTimer;
+    private boolean timeRunning, muted;
+    private int numIntervals,intervalLength,breakLength, incrementIntervalProgress, incrementTotalProgress, incrementBreakProgress, soundID1,soundID2,counter = 0;
     private SoundPool sounds;
-    private int soundID1,soundID2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-        playButton = findViewById(R.id.playButton);
-        intervalBar = findViewById(R.id.progressBar);
-        restBar = findViewById(R.id.progressBarBreak);
-        totalBar = findViewById(R.id.progressBarTotal);
-        timerName = findViewById(R.id.timerNameText);
-        intervalLeft = findViewById(R.id.progressLeftText);
-        countdownText = findViewById(R.id.countdownStartText);
-        totalLeftText = findViewById(R.id.totalLeftText);
-        restLeft = findViewById(R.id.breakText);
-        t = getIntent().getParcelableExtra("selectedAlarm");
-        numIntervals = t.getNumIntervals();
-        intervalLength = t.getIntervalLength();
-        breakLength = t.getBreakLength();
-        intervalBar.setMax(intervalLength);
-        incrementIntervalProgress = 1;
-        restBar.setMax(breakLength);
-        incrementBreakProgress = 1;
-        totalBar.setMax(numIntervals);
-        incrementTotalProgress = 1;
-        incrementIntervalProgress = 1;
-        Drawable draw= getDrawable(R.drawable.progressb);
-        Drawable draw2 = getDrawable(R.drawable.progressb);
-        Drawable draw3 = getDrawable(R.drawable.progressb);
-        intervalBar.setProgressDrawable(draw);
-        restBar.setProgressDrawable(draw2);
-        totalBar.setProgressDrawable(draw3);
-        sounds = new SoundPool(5,AudioManager.STREAM_MUSIC,0);
-        soundID1 = sounds.load(getApplicationContext(),R.raw.beepmain,1);
-        soundID2 = sounds.load(getApplicationContext(),R.raw.beepsecondary,2);
+        initializeObjects();
         updateUI();
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!timeRunning)
-                    cdTimer();
+                    beginTimer();
+            }
+        });
+        muteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(muted){
+                    muted = false;
+                    muteButton.setBackground(unmuteTexture);
+                }
+                else{
+                    muted = true;
+                    muteButton.setBackground(muteTexture);
+                }
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetTimer();
             }
         });
     }
@@ -84,14 +72,14 @@ public class timer extends AppCompatActivity {
         restBar.setProgress(restBar.getMax());
         totalBar.setProgress(totalBar.getMax());
     }
-    private void cdTimer(){
+    private void beginTimer(){
         timeRunning = true;
         totalBar.setProgress(0);
         restBar.setProgress(0);
         intervalBar.setProgress(0);
         playButton.setVisibility(View.INVISIBLE);
         countdownText.setVisibility(View.VISIBLE);
-        mCountDownTimer = new CountDownTimer(3000,1000) {
+        startTimer = new CountDownTimer(3000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 countdownText.setText(""+(1+(millisUntilFinished/1000)));
@@ -109,7 +97,7 @@ public class timer extends AppCompatActivity {
         }.start();
     }
     private void executeTimer(){
-        mCountDownTimer = new CountDownTimer((intervalLength+breakLength)*1000*numIntervals,(intervalLength+breakLength)*1000) {
+        totalTimer = new CountDownTimer((intervalLength+breakLength)*1000*numIntervals,(intervalLength+breakLength)*1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 if(totalBar.getProgress()+incrementTotalProgress>totalBar.getMax()-incrementTotalProgress)
@@ -135,7 +123,7 @@ public class timer extends AppCompatActivity {
         }.start();
     }
     private void intervalTimer(){
-        mCountDownTimer = new CountDownTimer(intervalLength*1000,1000) {
+        intTimer = new CountDownTimer(intervalLength*1000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 intervalLeft.setText(""+(Math.round((double)millisUntilFinished / 1000.0)));
@@ -163,7 +151,7 @@ public class timer extends AppCompatActivity {
         }.start();
     }
     private void breakTimer(){
-        mCountDownTimer = new CountDownTimer(breakLength * 1000, 1000) {
+        breakTimer = new CountDownTimer(breakLength * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 restLeft.setText("" + (Math.round((double) millisUntilFinished / 1000.0)));
@@ -183,11 +171,28 @@ public class timer extends AppCompatActivity {
         }.start();
     }
     private void resetTimer(){
+        if(startTimer!=null){
+            startTimer.cancel();
+            startTimer = null;
+        }
+        if(totalTimer!=null){
+            totalTimer.cancel();
+            totalTimer = null;
+        }
+        if(intTimer!=null){
+            intTimer.cancel();
+            intTimer = null;
+        }
+        if(breakTimer!=null){
+            breakTimer.cancel();
+            breakTimer = null;
+        }
         counter = 0;
         timerName.setText(t.getName());
-        totalBar.setProgress(totalBar.getMax());
-        restBar.setProgress(restBar.getMax());
-        intervalBar.setProgress(intervalBar.getMax());
+        totalBar.setProgress(0);
+        restBar.setProgress(0);
+        intervalBar.setProgress(0);
+        countdownText.setVisibility(View.INVISIBLE);
         intervalLeft.setText(""+intervalLength);
         restLeft.setText("" + breakLength);
         totalLeftText.setText(numIntervals+"/"+numIntervals);
@@ -195,9 +200,47 @@ public class timer extends AppCompatActivity {
         playButton.setVisibility(View.VISIBLE);
     }
     private void playSound(boolean main){
-        if(main)
-            sounds.play(soundID1,1,1,1,0,1);
-        else
-            sounds.play(soundID2,1,1,1,0,1);
+        if(!muted) {
+            if (main)
+                sounds.play(soundID1, 1, 1, 1, 0, 1);
+            else
+                sounds.play(soundID2, 1, 1, 1, 0, 1);
+        }
+    }
+    private void initializeObjects(){
+        playButton = findViewById(R.id.playButton);
+        cancelButton = findViewById(R.id.cancelButton);
+        muteButton = findViewById(R.id.muteButton);
+        intervalBar = findViewById(R.id.progressBar);
+        restBar = findViewById(R.id.progressBarBreak);
+        totalBar = findViewById(R.id.progressBarTotal);
+        timerName = findViewById(R.id.timerNameText);
+        intervalLeft = findViewById(R.id.progressLeftText);
+        countdownText = findViewById(R.id.countdownStartText);
+        totalLeftText = findViewById(R.id.totalLeftText);
+        restLeft = findViewById(R.id.breakText);
+        t = getIntent().getParcelableExtra("selectedAlarm");
+        numIntervals = t.getNumIntervals();
+        intervalLength = t.getIntervalLength();
+        breakLength = t.getBreakLength();
+        intervalBar.setMax(intervalLength);
+        incrementIntervalProgress = 1;
+        restBar.setMax(breakLength);
+        incrementBreakProgress = 1;
+        totalBar.setMax(numIntervals);
+        incrementTotalProgress = 1;
+        incrementIntervalProgress = 1;
+        Drawable draw= getDrawable(R.drawable.progressb);
+        Drawable draw2 = getDrawable(R.drawable.progressb);
+        Drawable draw3 = getDrawable(R.drawable.progressb);
+        muteTexture = getDrawable(R.drawable.mute);
+        unmuteTexture = getDrawable(R.drawable.unmute);
+        intervalBar.setProgressDrawable(draw);
+        restBar.setProgressDrawable(draw2);
+        totalBar.setProgressDrawable(draw3);
+        sounds = new SoundPool(5,AudioManager.STREAM_MUSIC,0);
+        soundID1 = sounds.load(getApplicationContext(),R.raw.beepmain,1);
+        soundID2 = sounds.load(getApplicationContext(),R.raw.beepsecondary,2);
+        muted = false;
     }
 }

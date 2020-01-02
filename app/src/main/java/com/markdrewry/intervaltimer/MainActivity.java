@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         addTimer = findViewById(R.id.addTimer);
         timerOptions = findViewById(R.id.timerListview);
         editTimerButton = findViewById(R.id.editTimers);
-        saveChangesBackground = getDrawable(R.drawable.savetimer);
-        editBackground = getDrawable(R.drawable.edit);
+        saveChangesBackground = getDrawable(R.drawable.savebutton);
+        editBackground = getDrawable(R.drawable.settings);
         edit = false;
         addTimer.setVisibility(View.INVISIBLE);
         circleBackground = findViewById(R.id.circleBackground);
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this,timer.class);
                 intent.putExtra("selectedAlarm",timers.get(position));
-                Log.d("IntervalTimer","Alarm selected: "+timers.get(position).getName());
                 startActivity(intent);
             }
         });
