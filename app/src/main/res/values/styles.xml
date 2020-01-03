@@ -13,7 +13,7 @@
     <style name="NightMode" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#464159</item>
-        <item name="colorPrimaryDark">#b21f66</item>
+        <item name="colorPrimaryDark">#f6f7d7</item>
         <item name="colorPrimaryLight">#6c7b95</item>
         <item name="colorAccent">#ff165d</item>
         <item name="android:statusBarColor">#464159</item>

@@ -20,7 +20,7 @@
     <ImageButton
         android:id="@+id/deleteTimerButton"
         android:layout_width="24dp"
-        android:layout_height="32dp"
+        android:layout_height="28dp"
         android:background="@drawable/deletebutton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"></ImageButton>

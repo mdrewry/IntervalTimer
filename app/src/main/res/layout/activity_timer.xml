@@ -220,6 +220,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:text="3"
+        android:textColor="@color/black"
         android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="@id/playButton"
         app:layout_constraintEnd_toEndOf="@id/playButton"
