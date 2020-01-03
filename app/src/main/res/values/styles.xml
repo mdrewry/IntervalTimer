@@ -3,10 +3,19 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="colorPrimary">#3EC1D3</item>
+        <item name="colorPrimaryDark">#ff9a00</item>
+        <item name="colorPrimaryLight">#f6f7d7</item>
+        <item name="colorAccent">#ff165d</item>
+        <item name="android:statusBarColor">#3EC1D3</item>
     </style>
-
+    <!-- Night application theme. -->
+    <style name="NightMode" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#464159</item>
+        <item name="colorPrimaryDark">#b21f66</item>
+        <item name="colorPrimaryLight">#6c7b95</item>
+        <item name="colorAccent">#ff165d</item>
+        <item name="android:statusBarColor">#464159</item>
+    </style>
 </resources>

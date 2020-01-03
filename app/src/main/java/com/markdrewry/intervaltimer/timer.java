@@ -3,6 +3,8 @@ package com.markdrewry.intervaltimer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -26,13 +28,12 @@ public class timer extends AppCompatActivity {
     private TextView timerName, intervalLeft, restLeft, countdownText, totalLeftText;
     private TimerObj t;
     private CountDownTimer startTimer,totalTimer,intTimer,breakTimer;
-    private boolean timeRunning, muted;
+    private boolean timeRunning, muted, darkMode;
     private int numIntervals,intervalLength,breakLength, incrementIntervalProgress, incrementTotalProgress, incrementBreakProgress, soundID1,soundID2,counter = 0;
     private SoundPool sounds;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timer);
         initializeObjects();
         updateUI();
         playButton.setOnClickListener(new View.OnClickListener() {
@@ -207,7 +208,17 @@ public class timer extends AppCompatActivity {
                 sounds.play(soundID2, 1, 1, 1, 0, 1);
         }
     }
+    private void setDarkMode(){
+        if(darkMode)
+            setTheme(R.style.NightMode);
+        else
+            setTheme(R.style.AppTheme);
+    }
     private void initializeObjects(){
+        t = getIntent().getParcelableExtra("selectedAlarm");
+        darkMode = getIntent().getBooleanExtra("darkMode",false);
+        setDarkMode();
+        setContentView(R.layout.activity_timer);
         playButton = findViewById(R.id.playButton);
         cancelButton = findViewById(R.id.cancelButton);
         muteButton = findViewById(R.id.muteButton);
@@ -219,7 +230,6 @@ public class timer extends AppCompatActivity {
         countdownText = findViewById(R.id.countdownStartText);
         totalLeftText = findViewById(R.id.totalLeftText);
         restLeft = findViewById(R.id.breakText);
-        t = getIntent().getParcelableExtra("selectedAlarm");
         numIntervals = t.getNumIntervals();
         intervalLength = t.getIntervalLength();
         breakLength = t.getBreakLength();

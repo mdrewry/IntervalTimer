@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/colorPrimary">
+    android:background="?attr/colorPrimary">
     <ImageView
         android:id="@+id/backgroundRectangle"
         android:layout_width="0dp"
@@ -20,6 +20,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/timerListview"/>
     <ImageView
+        android:id="@+id/saveBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rectangle3"
+        android:layout_margin="15dp"
+        app:layout_constraintStart_toStartOf="@id/editTimers"
+        app:layout_constraintEnd_toEndOf="@id/editTimers"
+        app:layout_constraintTop_toTopOf="@id/editTimers"
+        app:layout_constraintBottom_toBottomOf="@id/editTimers"></ImageView>
+    <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/circleBackground"
@@ -30,13 +40,35 @@
         app:layout_constraintEnd_toEndOf="@id/addTimer"
         app:layout_constraintTop_toTopOf="@id/addTimer"
         app:layout_constraintBottom_toBottomOf="@id/addTimer"/>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/circleBackgroundDark"
+        android:background="@drawable/circle"
+        android:scaleX=".6"
+        android:scaleY=".6"
+        app:layout_constraintStart_toStartOf="@id/darkModeButton"
+        app:layout_constraintEnd_toEndOf="@id/darkModeButton"
+        app:layout_constraintTop_toTopOf="@id/darkModeButton"
+        app:layout_constraintBottom_toBottomOf="@id/darkModeButton"/>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/circleBackgroundEdit"
+        android:background="@drawable/circle"
+        android:scaleX=".4"
+        android:scaleY=".4"
+        app:layout_constraintStart_toStartOf="@id/editTimers"
+        app:layout_constraintEnd_toEndOf="@id/editTimers"
+        app:layout_constraintTop_toTopOf="@id/editTimers"
+        app:layout_constraintBottom_toBottomOf="@id/editTimers"/>
     <TextView
         android:id="@+id/selectTimerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:text="@string/selectTimerText"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="?attr/colorPrimaryDark"
         android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +77,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25" />
-
+    <TextView
+        android:id="@+id/addTimerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Add Timer"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="24dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@id/addTimer"
+        app:layout_constraintTop_toTopOf="@id/addTimer"
+        app:layout_constraintBottom_toBottomOf="@id/addTimer"/>
+    <TextView
+        android:id="@+id/changeDarkModeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Dark Mode"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="24dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@id/darkModeButton"
+        app:layout_constraintTop_toTopOf="@id/darkModeButton"
+        app:layout_constraintBottom_toBottomOf="@id/darkModeButton"/>
     <ListView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,6 +111,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectTimerTextView" />
+    <ImageButton
+        android:id="@+id/darkModeButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:text="Button"
+        android:background="@drawable/darkmodebutton"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/addTimer"/>
 
     <ImageButton
         android:id="@+id/addTimer"
@@ -63,10 +127,9 @@
         android:layout_height="64dp"
         android:text="Button"
         android:background="@drawable/addbutton"
+        android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/backgroundRectangle" />
+        app:layout_constraintBottom_toTopOf="@id/editTimers"/>
 
     <ImageButton
         android:id="@+id/editTimers"

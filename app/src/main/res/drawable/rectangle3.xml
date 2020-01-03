@@ -3,6 +3,6 @@
     android:shape="rectangle"
     android:thickness="50dp"
     android:useLevel="false">
-    <solid  android:color="?attr/colorPrimaryDark"></solid>
+    <solid  android:color="?attr/colorPrimaryLight"></solid>
 
 </shape>

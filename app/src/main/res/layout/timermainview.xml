@@ -8,20 +8,20 @@
     <TextView
         android:id="@+id/nameOfTimerInList"
         android:layout_width="match_parent"
-        android:layout_marginEnd="24dp"
-        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_height="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="?attr/colorPrimaryDark"
         android:textSize="24dp" />
 
     <ImageButton
         android:id="@+id/deleteTimerButton"
         android:layout_width="24dp"
         android:layout_height="32dp"
-        android:background="@drawable/delete"
+        android:background="@drawable/deletebutton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"></ImageButton>
 </androidx.constraintlayout.widget.ConstraintLayout>

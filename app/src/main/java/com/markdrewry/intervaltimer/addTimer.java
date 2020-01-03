@@ -28,9 +28,12 @@ public class addTimer extends AppCompatActivity {
     private EditText lenBreak;
     private TimerObj newT;
     private ArrayList<TimerObj> timers;
+    private Boolean darkMode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        darkMode = getIntent().getBooleanExtra("darkMode",false);
+        setDarkMode();
         setContentView(R.layout.activity_add_timer);
         nameText = findViewById(R.id.editNameOfTimer);
         numIntText = findViewById(R.id.editNumOfIntervals);
@@ -80,5 +83,10 @@ public class addTimer extends AppCompatActivity {
         editor.putString("timers",json);
         editor.apply();
     }
-
+    private void setDarkMode(){
+        if(darkMode)
+            setTheme(R.style.NightMode);
+        else
+            setTheme(R.style.AppTheme);
+    }
 }
