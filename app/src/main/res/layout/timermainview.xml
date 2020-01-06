@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="6dp">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewMain"
         android:layout_width="match_parent"
         android:layout_height="32dp"
         app:layout_constraintStart_toStartOf="@id/nameOfTimerInList"
@@ -14,20 +14,108 @@
         app:layout_constraintTop_toTopOf="@id/nameOfTimerInList"
         app:layout_constraintBottom_toBottomOf="@id/nameOfTimerInList"
         app:cardElevation="40dp"
+        app:cardCornerRadius="8dp"
         app:cardBackgroundColor="?attr/colorPrimary"
+        ></androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDelete"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintStart_toStartOf="@id/deleteTimerButton"
+        app:layout_constraintEnd_toEndOf="@id/deleteTimerButton"
+        app:layout_constraintTop_toTopOf="@id/deleteTimerButton"
+        app:layout_constraintBottom_toBottomOf="@id/deleteTimerButton"
+        app:cardElevation="40dp"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="?attr/colorAccent"
+        ></androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewNumIntervals"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintStart_toEndOf="@id/nameOfTimerInList"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="12dp"
+        app:cardElevation="40dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="?attr/colorAccent"
+        ></androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewLengthIntervals"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintStart_toEndOf="@id/cardViewNumIntervals"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="12dp"
+        app:cardElevation="40dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="?attr/colorAccent"
+        ></androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewLengthBreak"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintStart_toEndOf="@id/cardViewLengthIntervals"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="12dp"
+        app:cardElevation="40dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="?attr/colorAccent"
         ></androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/nameOfTimerInList"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:textColor="?attr/textColor"
         android:elevation="40dp"
         android:textSize="24dp" />
+    <TextView
+        android:id="@+id/numIntervalsInList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/cardViewNumIntervals"
+        app:layout_constraintEnd_toEndOf="@id/cardViewNumIntervals"
+        app:layout_constraintTop_toTopOf="@id/cardViewNumIntervals"
+        app:layout_constraintBottom_toBottomOf="@id/cardViewNumIntervals"
+        android:textColor="?attr/textColor"
+        android:gravity="center"
+        android:elevation="40dp"
+        android:textSize="12dp"
+        android:text="5"/>
+
+    <TextView
+        android:id="@+id/lengthIntervalInList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/cardViewLengthIntervals"
+        app:layout_constraintEnd_toEndOf="@id/cardViewLengthIntervals"
+        app:layout_constraintTop_toTopOf="@id/cardViewLengthIntervals"
+        app:layout_constraintBottom_toBottomOf="@id/cardViewLengthIntervals"
+        android:textColor="?attr/textColor"
+        android:gravity="center"
+        android:elevation="40dp"
+        android:textSize="12dp"
+        android:text="5"/>
+    <TextView
+        android:id="@+id/lengthBreakInList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/cardViewLengthBreak"
+        app:layout_constraintEnd_toEndOf="@id/cardViewLengthBreak"
+        app:layout_constraintTop_toTopOf="@id/cardViewLengthBreak"
+        app:layout_constraintBottom_toBottomOf="@id/cardViewLengthBreak"
+        android:textColor="?attr/textColor"
+        android:gravity="center"
+        android:elevation="40dp"
+        android:textSize="12dp"
+        android:text="5"/>
 
     <ImageButton
         android:id="@+id/deleteTimerButton"
@@ -36,6 +124,7 @@
         android:background="@drawable/deletebutton"
         app:layout_constraintTop_toTopOf="@id/nameOfTimerInList"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp"
         android:elevation="40dp"
         app:layout_constraintBottom_toBottomOf="@id/nameOfTimerInList"></ImageButton>
 </androidx.constraintlayout.widget.ConstraintLayout>

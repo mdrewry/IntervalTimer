@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="@id/createTimerText"
         app:cardBackgroundColor="?attr/colorSecondary"
         app:cardElevation="8dp"
-        app:cardCornerRadius="20dp"></androidx.cardview.widget.CardView>
+        app:cardCornerRadius="10dp"></androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewSave"
         android:layout_width="100dp"
@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="@id/saveTimerButton"
         app:layout_constraintTop_toTopOf="@id/saveTimerButton"
         app:layout_constraintBottom_toBottomOf="@id/saveTimerButton"
-        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardBackgroundColor="?attr/colorAccent"
         app:cardElevation="8dp"
         app:cardCornerRadius="50dp"></androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView

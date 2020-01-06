@@ -46,11 +46,16 @@ public class addTimer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!nameText.getText().toString().equals("") && !numIntText.getText().toString().equals("") && !lenInt.getText().toString().equals("") && !lenBreak.getText().toString().equals("")){
-                    createTimer();
-                    storeList();
-                    Intent exit = new Intent(addTimer.this,MainActivity.class);
-                    finish();
-                    startActivity(exit);
+                    if(nameText.getText().length()>12){
+                        Toast.makeText(addTimer.this, "Name must be less than 12 characters",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        createTimer();
+                        storeList();
+                        Intent exit = new Intent(addTimer.this, MainActivity.class);
+                        finish();
+                        startActivity(exit);
+                    }
                 }
                 else{
                     Toast.makeText(addTimer.this, "fill all fields",Toast.LENGTH_SHORT).show();

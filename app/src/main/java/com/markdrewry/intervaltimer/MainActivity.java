@@ -210,10 +210,27 @@ public class MainActivity extends AppCompatActivity {
             View itemView = convertView;
             itemView = (itemView == null) ? inflater.inflate(R.layout.timermainview,null): itemView;
             TextView timerName = itemView.findViewById(R.id.nameOfTimerInList);
-            timerName.setText(timers.get(position).getName());
+            TextView numIntervalsInList = itemView.findViewById(R.id.numIntervalsInList);
+            TextView lengthIntervalInList = itemView.findViewById(R.id.lengthIntervalInList);
+            TextView lengthBreakInList = itemView.findViewById(R.id.lengthBreakInList);
             ImageButton deleteB = itemView.findViewById(R.id.deleteTimerButton);
+            CardView cardViewDelete = itemView.findViewById(R.id.cardViewDelete);
+            CardView cardViewNumIntervals = itemView.findViewById(R.id.cardViewNumIntervals);
+            CardView cardViewLengthIntervals = itemView.findViewById(R.id.cardViewLengthIntervals);
+            CardView cardViewLengthBreak = itemView.findViewById(R.id.cardViewLengthBreak);
+            numIntervalsInList.setText(""+timers.get(position).getNumIntervals());
+            lengthIntervalInList.setText(""+timers.get(position).getIntervalLength());
+            lengthBreakInList.setText(""+timers.get(position).getBreakLength());
+            timerName.setText(timers.get(position).getName());
             if(MainActivity.edit) {
                 deleteB.setVisibility(View.VISIBLE);
+                cardViewDelete.setVisibility(View.VISIBLE);
+                cardViewNumIntervals.setVisibility(View.INVISIBLE);
+                cardViewLengthBreak.setVisibility(View.INVISIBLE);
+                cardViewLengthIntervals.setVisibility(View.INVISIBLE);
+                numIntervalsInList.setVisibility(View.INVISIBLE);
+                lengthIntervalInList.setVisibility(View.INVISIBLE);
+                lengthBreakInList.setVisibility(View.INVISIBLE);
                 deleteB.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -222,8 +239,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-            else
+            else {
                 deleteB.setVisibility(View.INVISIBLE);
+                cardViewDelete.setVisibility(View.INVISIBLE);
+                cardViewNumIntervals.setVisibility(View.VISIBLE);
+                cardViewLengthBreak.setVisibility(View.VISIBLE);
+                cardViewLengthIntervals.setVisibility(View.VISIBLE);
+                numIntervalsInList.setVisibility(View.VISIBLE);
+                lengthIntervalInList.setVisibility(View.VISIBLE);
+                lengthBreakInList.setVisibility(View.VISIBLE);
+            }
             return itemView;
         }
     }

@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="@id/editTimers"
         app:layout_constraintTop_toTopOf="@id/editTimers"
         app:layout_constraintBottom_toBottomOf="@id/editTimers"
-        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardBackgroundColor="?attr/colorAccent"
         app:cardElevation="8dp"
         ></androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="@id/addTimer"
         app:layout_constraintTop_toTopOf="@id/addTimer"
         app:layout_constraintBottom_toBottomOf="@id/addTimer"
-        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardBackgroundColor="?attr/colorAccent"
         app:cardElevation="8dp"
         ></androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="@id/darkModeButton"
         app:layout_constraintTop_toTopOf="@id/darkModeButton"
         app:layout_constraintBottom_toBottomOf="@id/darkModeButton"
-        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardBackgroundColor="?attr/colorAccent"
         app:cardElevation="8dp"
         ></androidx.cardview.widget.CardView>
     <TextView

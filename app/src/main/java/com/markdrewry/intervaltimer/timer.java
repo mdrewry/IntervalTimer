@@ -2,6 +2,7 @@ package com.markdrewry.intervaltimer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,7 +31,7 @@ public class timer extends AppCompatActivity {
     private TimerObj t;
     private CountDownTimer startTimer,totalTimer,intTimer,breakTimer;
     private boolean timeRunning, muted, darkMode;
-    private int numIntervals,intervalLength,breakLength, incrementIntervalProgress, incrementTotalProgress, incrementBreakProgress, soundID1,soundID2,counter = 0;
+    private int numIntervals,intervalLength,breakLength, totalLength, soundID1,soundID2,counter = 0;
     private SoundPool sounds;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,9 @@ public class timer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 resetTimer();
+                Intent intent = new Intent(timer.this,MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -98,13 +103,9 @@ public class timer extends AppCompatActivity {
         }.start();
     }
     private void executeTimer(){
-        totalTimer = new CountDownTimer((intervalLength+breakLength)*1000*numIntervals,(intervalLength+breakLength)*1000) {
+        totalTimer = new CountDownTimer(totalLength*1000,(intervalLength+breakLength)*1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if(totalBar.getProgress()+incrementTotalProgress>totalBar.getMax()-incrementTotalProgress)
-                    totalBar.setProgress(totalBar.getMax());
-                else
-                    totalBar.incrementProgressBy(incrementTotalProgress);
                 totalLeftText.setText(counter+1+"/"+numIntervals);
                 intervalTimer();
             }
@@ -122,13 +123,13 @@ public class timer extends AppCompatActivity {
                 }.start();
             }
         }.start();
+        animateProgress(totalBar,totalLength*1000);
     }
     private void intervalTimer(){
         intTimer = new CountDownTimer(intervalLength*1000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 intervalLeft.setText(""+(Math.round((double)millisUntilFinished / 1000.0)));
-                intervalBar.incrementProgressBy(incrementIntervalProgress);
                 if(millisUntilFinished<=3000){
                     if(millisUntilFinished<=1000)
                         playSound(false);
@@ -136,7 +137,6 @@ public class timer extends AppCompatActivity {
                         playSound(true);
                 }
             }
-
             @Override
             public void onFinish() {
                 counter++;
@@ -150,13 +150,13 @@ public class timer extends AppCompatActivity {
                 breakTimer();
             }
         }.start();
+        animateProgress(intervalBar,intervalLength*1000);
     }
     private void breakTimer(){
         breakTimer = new CountDownTimer(breakLength * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 restLeft.setText("" + (Math.round((double) millisUntilFinished / 1000.0)));
-                restBar.incrementProgressBy(incrementBreakProgress);
                 if(millisUntilFinished<=3000){
                     if(millisUntilFinished<=1000)
                         playSound(false);
@@ -170,6 +170,7 @@ public class timer extends AppCompatActivity {
                 restBar.setProgress(0);
             }
         }.start();
+        animateProgress(restBar,breakLength*1000);
     }
     private void resetTimer(){
         if(startTimer!=null){
@@ -214,6 +215,12 @@ public class timer extends AppCompatActivity {
         else
             setTheme(R.style.AppTheme);
     }
+    private void animateProgress(ProgressBar temp, int interval){
+        ObjectAnimator intervalBarAnimator = new ObjectAnimator().ofInt(temp,"progress",0,interval);
+        intervalBarAnimator.setDuration(interval);
+        intervalBarAnimator.setInterpolator(new LinearInterpolator());
+        intervalBarAnimator.start();
+    }
     private void initializeObjects(){
         t = getIntent().getParcelableExtra("selectedAlarm");
         darkMode = getIntent().getBooleanExtra("darkMode",false);
@@ -233,13 +240,10 @@ public class timer extends AppCompatActivity {
         numIntervals = t.getNumIntervals();
         intervalLength = t.getIntervalLength();
         breakLength = t.getBreakLength();
-        intervalBar.setMax(intervalLength);
-        incrementIntervalProgress = 1;
-        restBar.setMax(breakLength);
-        incrementBreakProgress = 1;
-        totalBar.setMax(numIntervals);
-        incrementTotalProgress = 1;
-        incrementIntervalProgress = 1;
+        totalLength = (intervalLength+breakLength)*numIntervals;
+        restBar.setMax(breakLength*1000);
+        intervalBar.setMax(intervalLength*1000);
+        totalBar.setMax(totalLength*1000);
         Drawable draw= getDrawable(R.drawable.progressb);
         Drawable draw2 = getDrawable(R.drawable.progressb);
         Drawable draw3 = getDrawable(R.drawable.progressb);
