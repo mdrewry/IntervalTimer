@@ -3,6 +3,7 @@ package com.markdrewry.intervaltimer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private TimerListAdapter adapter;
     private Drawable saveChangesBackground, editBackground;
     private TextView addTimerText,darkModeText;
-    private ImageView circleBackground, circleBackgroundEdit, circleBackgroundDarkMode,saveTimersBackground;
+    private CardView cardViewAdd,cardViewDarkMode;
     public static boolean edit, darkMode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,26 +128,22 @@ public class MainActivity extends AppCompatActivity {
     }
     private void editTimers(){
         addTimer.setVisibility(View.VISIBLE);
-        circleBackground.setVisibility(View.VISIBLE);
-        circleBackgroundEdit.setVisibility(View.INVISIBLE);
+        cardViewAdd.setVisibility(View.VISIBLE);
         darkModeButton.setVisibility(View.VISIBLE);
-        circleBackgroundDarkMode.setVisibility(View.VISIBLE);
+        cardViewDarkMode.setVisibility(View.VISIBLE);
         darkModeText.setVisibility(View.VISIBLE);
         addTimerText.setVisibility(View.VISIBLE);
-        saveTimersBackground.setVisibility(View.VISIBLE);
         editTimerButton.setBackground(saveChangesBackground);
         edit = true;
         adapter.notifyDataSetChanged();
     }
     private void saveChanges(){
         addTimer.setVisibility(View.INVISIBLE);
-        circleBackground.setVisibility(View.INVISIBLE);
-        circleBackgroundEdit.setVisibility(View.VISIBLE);
+        cardViewAdd.setVisibility(View.INVISIBLE);
         darkModeButton.setVisibility(View.INVISIBLE);
-        circleBackgroundDarkMode.setVisibility(View.INVISIBLE);
+        cardViewDarkMode.setVisibility(View.INVISIBLE);
         darkModeText.setVisibility(View.INVISIBLE);
         addTimerText.setVisibility(View.INVISIBLE);
-        saveTimersBackground.setVisibility(View.INVISIBLE);
         editTimerButton.setBackground(editBackground);
         edit = false;
         adapter.notifyDataSetChanged();
@@ -164,13 +161,11 @@ public class MainActivity extends AppCompatActivity {
         addTimer = findViewById(R.id.addTimer);
         timerOptions = findViewById(R.id.timerListview);
         editTimerButton = findViewById(R.id.editTimers);
-        circleBackgroundEdit = findViewById(R.id.circleBackgroundEdit);
-        circleBackgroundDarkMode = findViewById(R.id.circleBackgroundDark);
+        cardViewDarkMode = findViewById(R.id.cardViewDarkMode);
+        cardViewAdd = findViewById(R.id.cardViewAdd);
         darkModeButton = findViewById(R.id.darkModeButton);
         addTimerText = findViewById(R.id.addTimerText);
         darkModeText = findViewById(R.id.changeDarkModeText);
-        saveTimersBackground = findViewById(R.id.saveBackground);
-        saveTimersBackground.setVisibility(View.INVISIBLE);
         saveChangesBackground = getDrawable(R.drawable.savebutton);
         editBackground = getDrawable(R.drawable.settings);
         edit = false;
@@ -178,9 +173,8 @@ public class MainActivity extends AppCompatActivity {
         addTimerText.setVisibility(View.INVISIBLE);
         addTimer.setVisibility(View.INVISIBLE);
         darkModeButton.setVisibility(View.INVISIBLE);
-        circleBackgroundDarkMode.setVisibility(View.INVISIBLE);
-        circleBackground = findViewById(R.id.circleBackground);
-        circleBackground.setVisibility(View.INVISIBLE);
+        cardViewDarkMode.setVisibility(View.INVISIBLE);
+        cardViewAdd.setVisibility(View.INVISIBLE);
         adapter = new TimerListAdapter(this,timers);
         timerOptions.setAdapter(adapter);
     }

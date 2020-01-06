@@ -6,69 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="?attr/colorPrimary">
-    <ImageView
-        android:id="@+id/backgroundRectangle"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewMain"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:background="@drawable/rectangle"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardElevation="8dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/selectTimerTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/timerListview"/>
-    <ImageView
-        android:id="@+id/saveBackground"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/rectangle3"
-        android:layout_margin="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/timerListview"></androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewEdit"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        app:cardCornerRadius="36dp"
         app:layout_constraintStart_toStartOf="@id/editTimers"
         app:layout_constraintEnd_toEndOf="@id/editTimers"
         app:layout_constraintTop_toTopOf="@id/editTimers"
-        app:layout_constraintBottom_toBottomOf="@id/editTimers"></ImageView>
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/circleBackground"
-        android:background="@drawable/circle"
-        android:scaleX=".6"
-        android:scaleY=".6"
-        app:layout_constraintStart_toStartOf="@id/addTimer"
+        app:layout_constraintBottom_toBottomOf="@id/editTimers"
+        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardElevation="8dp"
+        ></androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewAdd"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="@id/addTimerText"
         app:layout_constraintEnd_toEndOf="@id/addTimer"
         app:layout_constraintTop_toTopOf="@id/addTimer"
-        app:layout_constraintBottom_toBottomOf="@id/addTimer"/>
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/circleBackgroundDark"
-        android:background="@drawable/circle"
-        android:scaleX=".6"
-        android:scaleY=".6"
-        app:layout_constraintStart_toStartOf="@id/darkModeButton"
+        app:layout_constraintBottom_toBottomOf="@id/addTimer"
+        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardElevation="8dp"
+        ></androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDarkMode"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="@id/changeDarkModeText"
         app:layout_constraintEnd_toEndOf="@id/darkModeButton"
         app:layout_constraintTop_toTopOf="@id/darkModeButton"
-        app:layout_constraintBottom_toBottomOf="@id/darkModeButton"/>
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/circleBackgroundEdit"
-        android:background="@drawable/circle"
-        android:scaleX=".4"
-        android:scaleY=".4"
-        app:layout_constraintStart_toStartOf="@id/editTimers"
-        app:layout_constraintEnd_toEndOf="@id/editTimers"
-        app:layout_constraintTop_toTopOf="@id/editTimers"
-        app:layout_constraintBottom_toBottomOf="@id/editTimers"/>
+        app:layout_constraintBottom_toBottomOf="@id/darkModeButton"
+        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardElevation="8dp"
+        ></androidx.cardview.widget.CardView>
     <TextView
         android:id="@+id/selectTimerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:text="@string/selectTimerText"
-        android:textColor="?attr/colorPrimaryDark"
+        android:textColor="?attr/textColor"
         android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,16 +69,19 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.25"
+        android:elevation="8dp"/>
     <TextView
         android:id="@+id/addTimerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:text="Add Timer"
-        android:textColor="?attr/colorPrimaryDark"
-        android:textSize="24dp"
-        android:layout_marginEnd="4dp"
+        android:textColor="?attr/textColor"
+        android:textSize="18dp"
+        android:layout_marginEnd="8dp"
+        android:paddingStart="8dp"
+        android:elevation="8dp"
         app:layout_constraintEnd_toStartOf="@id/addTimer"
         app:layout_constraintTop_toTopOf="@id/addTimer"
         app:layout_constraintBottom_toBottomOf="@id/addTimer"/>
@@ -95,9 +91,11 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:text="Dark Mode"
-        android:textColor="?attr/colorPrimaryDark"
-        android:textSize="24dp"
-        android:layout_marginEnd="4dp"
+        android:textColor="?attr/textColor"
+        android:textSize="18dp"
+        android:layout_marginEnd="8dp"
+        android:paddingStart="8dp"
+        android:elevation="8dp"
         app:layout_constraintEnd_toStartOf="@id/darkModeButton"
         app:layout_constraintTop_toTopOf="@id/darkModeButton"
         app:layout_constraintBottom_toBottomOf="@id/darkModeButton"/>
@@ -105,17 +103,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/timerListview"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="4dp"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectTimerTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/selectTimerTextView"
+        android:elevation="8dp"/>
     <ImageButton
         android:id="@+id/darkModeButton"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:text="Button"
+        android:elevation="8dp"
         android:background="@drawable/darkmodebutton"
         android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +125,7 @@
         android:id="@+id/addTimer"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:text="Button"
+        android:elevation="8dp"
         android:background="@drawable/addbutton"
         android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -136,9 +136,9 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:background="@drawable/settings"
-        android:text="Button"
         android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:elevation="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

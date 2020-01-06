@@ -2,7 +2,8 @@
 <resources>
     <declare-styleable name="ds">
         <attr name="colorPrimary" format="color"></attr>
-        <attr name="colorPrimaryDark" format="color"></attr>
-        <attr name="colorPrimaryLight" format="color"></attr>
+        <attr name="progressBarColor" format="color"></attr>
+        <attr name="colorSecondary" format="color"></attr>
+        <attr name="textColor" format="color"></attr>
     </declare-styleable>
 </resources>

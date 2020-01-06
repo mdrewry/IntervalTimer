@@ -3,18 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="6dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        app:layout_constraintStart_toStartOf="@id/nameOfTimerInList"
+        app:layout_constraintEnd_toEndOf="@id/nameOfTimerInList"
+        app:layout_constraintTop_toTopOf="@id/nameOfTimerInList"
+        app:layout_constraintBottom_toBottomOf="@id/nameOfTimerInList"
+        app:cardElevation="40dp"
+        app:cardBackgroundColor="?attr/colorPrimary"
+        ></androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/nameOfTimerInList"
         android:layout_width="match_parent"
-        android:layout_marginEnd="32dp"
         android:layout_height="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
-        android:textColor="?attr/colorPrimaryDark"
+        android:textColor="?attr/textColor"
+        android:elevation="40dp"
         android:textSize="24dp" />
 
     <ImageButton
@@ -22,6 +34,8 @@
         android:layout_width="24dp"
         android:layout_height="28dp"
         android:background="@drawable/deletebutton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"></ImageButton>
+        app:layout_constraintTop_toTopOf="@id/nameOfTimerInList"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/nameOfTimerInList"></ImageButton>
 </androidx.constraintlayout.widget.ConstraintLayout>
