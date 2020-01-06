@@ -6,9 +6,9 @@ android {
     defaultConfig {
         applicationId "com.markdrewry.intervaltimer"
         minSdkVersion 22
-        targetSdkVersion 29
-        versionCode 2
-        versionName "1.1"
+        targetSdkVersion 28
+        versionCode 3
+        versionName "1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
