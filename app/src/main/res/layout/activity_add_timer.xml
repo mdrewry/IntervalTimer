@@ -20,17 +20,6 @@
         app:cardElevation="8dp"
         app:cardCornerRadius="20dp"></androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewTitle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="@id/createTimerText"
-        app:layout_constraintEnd_toEndOf="@id/createTimerText"
-        app:layout_constraintTop_toTopOf="@id/createTimerText"
-        app:layout_constraintBottom_toBottomOf="@id/createTimerText"
-        app:cardBackgroundColor="?attr/colorSecondary"
-        app:cardElevation="8dp"
-        app:cardCornerRadius="10dp"></androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
         android:id="@+id/cardViewSave"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -94,7 +83,7 @@
         android:textColor="?attr/textColor"
         android:inputType="textPersonName"
         android:textSize="20dp"
-        android:ems="8"
+        android:ems="7"
         app:layout_constraintTop_toTopOf="@id/cardViewMain"
         app:layout_constraintStart_toEndOf="@id/nameOfTimer"
         app:layout_constraintBottom_toTopOf="@id/editNumOfIntervals"
@@ -145,7 +134,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:text="Create Timer"
-        android:textSize="32dp"
+        android:textSize="48dp"
         android:textColor="?attr/textColor"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
