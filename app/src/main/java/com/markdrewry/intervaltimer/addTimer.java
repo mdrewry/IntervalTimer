@@ -22,10 +22,7 @@ import java.util.ArrayList;
 
 public class addTimer extends AppCompatActivity {
     private ImageButton saveTimer;
-    private EditText nameText;
-    private EditText numIntText;
-    private EditText lenInt;
-    private EditText lenBreak;
+    private EditText nameText, numIntText, lenInt, lenBreak;
     private TimerObj newT;
     private ArrayList<TimerObj> timers;
     private Boolean darkMode;
@@ -46,7 +43,7 @@ public class addTimer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!nameText.getText().toString().equals("") && !numIntText.getText().toString().equals("") && !lenInt.getText().toString().equals("") && !lenBreak.getText().toString().equals("")){
-                    if(nameText.getText().length()>12){
+                    if(nameText.getText().length()>10){
                         Toast.makeText(addTimer.this, "Name must be less than 12 characters",Toast.LENGTH_SHORT).show();
                     }
                     else {

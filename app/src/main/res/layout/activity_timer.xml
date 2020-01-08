@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
-    tools:context=".timer">
+    tools:context=".timer"
+    android:keepScreenOn="true">
     //decoration ImageViews
 
     <androidx.cardview.widget.CardView

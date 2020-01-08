@@ -2,6 +2,7 @@ package com.markdrewry.intervaltimer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,12 +25,13 @@ import android.widget.Toast;
 import javax.xml.datatype.Duration;
 
 public class timer extends AppCompatActivity {
-    private Drawable muteTexture,unmuteTexture;
+    private Drawable muteTexture,unMuteTexture;
     private ImageButton playButton, cancelButton, muteButton;
     private ProgressBar intervalBar, restBar, totalBar;
     private TextView timerName, intervalLeft, restLeft, countdownText, totalLeftText;
     private TimerObj t;
     private CountDownTimer startTimer,totalTimer,intTimer,breakTimer;
+    private ObjectAnimator intAnimator,breakAnimator,totalAnimator;
     private boolean timeRunning, muted, darkMode;
     private int numIntervals,intervalLength,breakLength, totalLength, soundID1,soundID2,counter = 0;
     private SoundPool sounds;
@@ -50,7 +52,7 @@ public class timer extends AppCompatActivity {
             public void onClick(View v) {
                 if(muted){
                     muted = false;
-                    muteButton.setBackground(unmuteTexture);
+                    muteButton.setBackground(unMuteTexture);
                 }
                 else{
                     muted = true;
@@ -61,10 +63,13 @@ public class timer extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetTimer();
-                Intent intent = new Intent(timer.this,MainActivity.class);
-                startActivity(intent);
-                finish();
+                if(timeRunning)
+                    resetTimer();
+                else {
+                    Intent intent = new Intent(timer.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }
@@ -179,21 +184,24 @@ public class timer extends AppCompatActivity {
         }
         if(totalTimer!=null){
             totalTimer.cancel();
+            totalAnimator.cancel();
             totalTimer = null;
         }
         if(intTimer!=null){
             intTimer.cancel();
+            intAnimator.cancel();
             intTimer = null;
         }
         if(breakTimer!=null){
             breakTimer.cancel();
+            breakAnimator.cancel();
             breakTimer = null;
         }
         counter = 0;
         timerName.setText(t.getName());
-        totalBar.setProgress(0);
-        restBar.setProgress(0);
-        intervalBar.setProgress(0);
+        totalBar.setProgress(totalBar.getMax());
+        restBar.setProgress(restBar.getMax());
+        intervalBar.setProgress(intervalBar.getMax());
         countdownText.setVisibility(View.INVISIBLE);
         intervalLeft.setText(""+intervalLength);
         restLeft.setText("" + breakLength);
@@ -216,10 +224,24 @@ public class timer extends AppCompatActivity {
             setTheme(R.style.AppTheme);
     }
     private void animateProgress(ProgressBar temp, int interval){
-        ObjectAnimator intervalBarAnimator = new ObjectAnimator().ofInt(temp,"progress",0,interval);
-        intervalBarAnimator.setDuration(interval);
-        intervalBarAnimator.setInterpolator(new LinearInterpolator());
-        intervalBarAnimator.start();
+        if(interval == intervalLength*1000) {
+            intAnimator = new ObjectAnimator().ofInt(temp, "progress", 0, interval);
+            intAnimator.setDuration(interval);
+            intAnimator.setInterpolator(new LinearInterpolator());
+            intAnimator.start();
+        }
+        if(interval == breakLength*1000) {
+            breakAnimator = new ObjectAnimator().ofInt(temp, "progress", 0, interval);
+            breakAnimator.setDuration(interval);
+            breakAnimator.setInterpolator(new LinearInterpolator());
+            breakAnimator.start();
+        }
+        if(interval == totalLength*1000) {
+            totalAnimator = new ObjectAnimator().ofInt(temp, "progress", 0, interval);
+            totalAnimator.setDuration(interval);
+            totalAnimator.setInterpolator(new LinearInterpolator());
+            totalAnimator.start();
+        }
     }
     private void initializeObjects(){
         t = getIntent().getParcelableExtra("selectedAlarm");
@@ -248,7 +270,7 @@ public class timer extends AppCompatActivity {
         Drawable draw2 = getDrawable(R.drawable.progressb);
         Drawable draw3 = getDrawable(R.drawable.progressb);
         muteTexture = getDrawable(R.drawable.mute);
-        unmuteTexture = getDrawable(R.drawable.unmute);
+        unMuteTexture = getDrawable(R.drawable.unmute);
         intervalBar.setProgressDrawable(draw);
         restBar.setProgressDrawable(draw2);
         totalBar.setProgressDrawable(draw3);
