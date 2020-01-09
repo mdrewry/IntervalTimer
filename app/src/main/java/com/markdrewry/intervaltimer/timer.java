@@ -123,12 +123,11 @@ public class timer extends AppCompatActivity {
                     }
                     @Override
                     public void onFinish() {
-                        resetTimer();
                     }
                 }.start();
             }
         }.start();
-        animateProgress(totalBar,totalLength*1000);
+        animateProgress(totalBar,(totalLength-breakLength)*1000);
     }
     private void intervalTimer(){
         intTimer = new CountDownTimer(intervalLength*1000,1000) {
@@ -148,11 +147,10 @@ public class timer extends AppCompatActivity {
                 intervalBar.setProgress(0);
                 intervalLeft.setText(""+0);
                 if(counter>=numIntervals){
-                    timerName.setText("Rest");
-                    restLeft.setText("");
-                    restBar.setProgress(0);
+                    resetTimer();
                 }
-                breakTimer();
+                else
+                    breakTimer();
             }
         }.start();
         animateProgress(intervalBar,intervalLength*1000);
@@ -236,7 +234,7 @@ public class timer extends AppCompatActivity {
             breakAnimator.setInterpolator(new LinearInterpolator());
             breakAnimator.start();
         }
-        if(interval == totalLength*1000) {
+        if(interval == (totalLength-breakLength)*1000) {
             totalAnimator = new ObjectAnimator().ofInt(temp, "progress", 0, interval);
             totalAnimator.setDuration(interval);
             totalAnimator.setInterpolator(new LinearInterpolator());
@@ -265,7 +263,7 @@ public class timer extends AppCompatActivity {
         totalLength = (intervalLength+breakLength)*numIntervals;
         restBar.setMax(breakLength*1000);
         intervalBar.setMax(intervalLength*1000);
-        totalBar.setMax(totalLength*1000);
+        totalBar.setMax((totalLength-breakLength)*1000);
         Drawable draw= getDrawable(R.drawable.progressb);
         Drawable draw2 = getDrawable(R.drawable.progressb);
         Drawable draw3 = getDrawable(R.drawable.progressb);

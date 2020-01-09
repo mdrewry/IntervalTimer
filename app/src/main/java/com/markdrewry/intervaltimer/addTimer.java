@@ -43,8 +43,8 @@ public class addTimer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!nameText.getText().toString().equals("") && !numIntText.getText().toString().equals("") && !lenInt.getText().toString().equals("") && !lenBreak.getText().toString().equals("")){
-                    if(nameText.getText().length()>10){
-                        Toast.makeText(addTimer.this, "Name must be less than 12 characters",Toast.LENGTH_SHORT).show();
+                    if(nameText.getText().length()>=11){
+                        Toast.makeText(addTimer.this, "Name must be 10 or less characters",Toast.LENGTH_SHORT).show();
                     }
                     else {
                         createTimer();

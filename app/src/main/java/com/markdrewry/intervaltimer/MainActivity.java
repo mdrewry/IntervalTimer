@@ -222,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
             lengthIntervalInList.setText(""+timers.get(position).getIntervalLength());
             lengthBreakInList.setText(""+timers.get(position).getBreakLength());
             timerName.setText(timers.get(position).getName());
+            itemView.setBackgroundResource(R.drawable.listviewselector);
             if(MainActivity.edit) {
                 deleteB.setVisibility(View.VISIBLE);
                 cardViewDelete.setVisibility(View.VISIBLE);
